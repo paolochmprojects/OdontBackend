@@ -7,7 +7,8 @@ import * as bcrypt from 'bcrypt';
 @Injectable()
 export class UsersService {
   constructor(private databaseService: DatabaseService) {}
-  async create(createUserDto: CreateUserDto) {
+
+  async create(createUserDto: CreateUserDto): Promise<void> {
     // verified if user already exists
     const userFound = await this.findUserByEmail(createUserDto.email);
     if (userFound) {
@@ -46,6 +47,8 @@ export class UsersService {
         id,
       },
     });
+
+    if (!user) throw new BadRequestException('User not found');
 
     if (withPass) {
       return user;
