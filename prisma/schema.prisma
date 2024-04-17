@@ -25,10 +25,39 @@ model Users {
   password String
   email    String  @unique
   isActive Boolean @default(false)
-  
-  updatedAt DateTime @updatedAt
-  createdAt DateTime @default(now())
+
+  patients  Patients[]
+  allergies Allergies[]
+  updatedAt DateTime    @updatedAt
+  createdAt DateTime    @default(now())
 }
 
-
 // TODO: session store for manage session with tokens
+
+model Patients {
+  id       String  @id @default(uuid())
+  fullName String
+  email    String?
+  phone    String?
+  numId    String? 
+  address   String?
+
+  allergies Allergies[]
+  updatedAt DateTime    @updatedAt
+  createdAt DateTime    @default(now())
+  Users     Users?      @relation(fields: [usersId], references: [id])
+  usersId   String?
+}
+
+model Allergies {
+  id           String @id @default(uuid())
+  name         String @unique
+  display_name String
+  description  String?
+
+  patiens   Patients[]
+  updatedAt DateTime   @updatedAt
+  createdAt DateTime   @default(now())
+  Users     Users?     @relation(fields: [usersId], references: [id])
+  usersId   String?
+}
