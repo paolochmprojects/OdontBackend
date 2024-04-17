@@ -4,6 +4,7 @@ import {
   Delete,
   Get,
   Param,
+  ParseUUIDPipe,
   Patch,
   Post,
   UseGuards,
@@ -33,9 +34,11 @@ export class AllergiesController {
     return await this.allergiesService.getAllAllergies(user.id);
   }
 
+  // TODO: implement search functions
+
   @Delete(':id')
   @UseGuards(JwtAuthGuard)
-  async delete(@GetUser() user: Users, @Param('id') id: string) {
+  async delete(@GetUser() user: Users, @Param('id', ParseUUIDPipe) id: string) {
     return await this.allergiesService.delete(id, user.id);
   }
 
@@ -43,7 +46,7 @@ export class AllergiesController {
   @UseGuards(JwtAuthGuard)
   async update(
     @GetUser() user: Users,
-    @Param('id') id: string,
+    @Param('id', ParseUUIDPipe) id: string,
     @Body() updateAlergyDto: UpdateAllergyDto,
   ) {
     await this.allergiesService.update(id, updateAlergyDto, user.id);
