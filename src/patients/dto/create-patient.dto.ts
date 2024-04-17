@@ -1,4 +1,12 @@
-import { IsEmail, IsPhoneNumber, IsString, MinLength } from 'class-validator';
+import {
+  IsArray,
+  IsEmail,
+  IsOptional,
+  IsPhoneNumber,
+  IsString,
+  IsUUID,
+  MinLength,
+} from 'class-validator';
 
 export class CreatePatientDto {
   @IsString()
@@ -6,14 +14,23 @@ export class CreatePatientDto {
   fullName: string;
 
   @IsEmail()
+  @IsOptional()
   email?: string;
 
+  @IsOptional()
   @IsPhoneNumber()
   phone?: string;
 
+  @IsOptional()
   @IsString()
   address?: string;
 
+  @IsOptional()
   @IsString()
   numId?: string;
+
+  @IsOptional()
+  @IsArray()
+  @IsUUID(4, { each: true })
+  allergies?: string[];
 }
