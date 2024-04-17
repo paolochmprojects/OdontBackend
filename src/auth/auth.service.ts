@@ -1,7 +1,7 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
-import { SigninAuthDto, SignupAuthDto } from './dto';
+import { JwtService } from '@nestjs/jwt';
 import { UsersService } from 'src/users/users.service';
-import { JwtService, TokenExpiredError } from '@nestjs/jwt';
+import { SigninAuthDto, SignupAuthDto } from './dto';
 
 interface Payload {
   id: string;
@@ -32,9 +32,7 @@ export class AuthService {
       throw new BadRequestException('Invalid credentials');
     }
 
-    const token = await this.generateJwtToken({ id: userFound.id });
-
-    return token;
+    return await this.generateJwtToken({ id: userFound.id });
   }
 
   async signUp(signupAuthDto: SignupAuthDto) {
