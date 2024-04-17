@@ -28,12 +28,29 @@ export class UsersService {
   }
 
   async findUserByEmail(email: string): Promise<Users | null> {
-    // vfind user by email
+    // find user by email
     const user = await this.databaseService.users.findUnique({
       where: {
         email,
       },
     });
+    return user;
+  }
+
+  async findUserById(
+    id: string,
+    withPass: boolean = false,
+  ): Promise<Users | null> {
+    const user = await this.databaseService.users.findUnique({
+      where: {
+        id,
+      },
+    });
+
+    if (withPass) {
+      return user;
+    }
+    delete user.password;
     return user;
   }
 
