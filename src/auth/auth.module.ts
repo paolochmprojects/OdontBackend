@@ -16,5 +16,6 @@ import config from 'src/config/config';
       signOptions: { expiresIn: config.JWT.EXPIRES_IN },
     }),
   ],
+  exports: [UsersModule],
 })
 export class AuthModule {}

@@ -1,4 +1,9 @@
-import { IsEmail, IsString, IsStrongPassword } from 'class-validator';
+import {
+  IsEmail,
+  IsString,
+  IsStrongPassword,
+  MinLength,
+} from 'class-validator';
 
 export class SignupAuthDto {
   @IsEmail()
@@ -8,5 +13,6 @@ export class SignupAuthDto {
   readonly password: string;
 
   @IsString()
+  @MinLength(3)
   readonly fullName: string;
 }
