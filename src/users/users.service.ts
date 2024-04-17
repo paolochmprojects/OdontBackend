@@ -21,7 +21,7 @@ export class UsersService {
     await this.databaseService.users.create({
       data: {
         fullName: createUserDto.fullName,
-        email: createUserDto.email,
+        email: createUserDto.email.trim().toLocaleLowerCase(),
         password: hashedPassword,
       },
     });
