@@ -12,7 +12,7 @@ import { UsersService } from 'src/users/users.service';
 import { JwtPayload } from '../interface/payload.interface';
 
 @Injectable()
-export class AuthGuard implements CanActivate {
+export class JwtAuthGuard implements CanActivate {
   constructor(
     private jwtService: JwtService,
     private usersService: UsersService,

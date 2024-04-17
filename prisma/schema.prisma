@@ -29,3 +29,6 @@ model Users {
   updatedAt DateTime @updatedAt
   createdAt DateTime @default(now())
 }
+
+
+// TODO: session store for manage session with tokens
