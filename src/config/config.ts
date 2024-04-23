@@ -5,4 +5,5 @@ export default {
     SECRET: process.env.JWT_SECRET,
     EXPIRES_IN: process.env.JWT_EXPIRES_IN,
   },
+  CORS_ORIGIN: process.env.CORS_ORIGIN.split(','),
 };
